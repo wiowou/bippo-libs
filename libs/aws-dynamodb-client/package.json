@@ -1,6 +1,6 @@
 {
   "name": "@bippo-libs/aws-dynamodb-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "commonjs",
   "license": "MIT",
   "keywords": [
@@ -9,9 +9,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wiowou/bippo-util.git"
+    "url": "git+https://github.com/wiowou/bippo-libs.git"
   },
-  "homepage": "https://github.com/wiowou/bippo-util/blob/master/libs/aws-dynamodb-client/README.md",
+  "homepage": "https://github.com/wiowou/bippo-libs/blob/master/libs/aws-dynamodb-client/README.md",
   "peerDependencies": {
     "@aws-sdk/client-dynamodb": "^3.0.0",
     "@aws-sdk/lib-dynamodb": "^3.0.0",
