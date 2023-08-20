@@ -13,7 +13,7 @@ npm install @bippo-libs/aws-dynamodb-client
 
 ## Usage
 
-Create a model class and use decorators for attributes and keys. Here, a DTO (Data Transfer Object) class is also defined so that keys and meta data like `createdOn` remain in the data access layer. Note that attributes can have aliases, and that some attributes are properties, others defined using methods, and still others with accessors. Attributes defined using properties and methods are overwritten with the values pulled from dynamodb whereas accessors (in this case getters) are not. This means after an item/model has been retrieved from dynamodb, `updatedOn` will always assume the datetime value of when it is written to dynamodb whereas `createdOn` will retain the value from dynamodb by default.
+Create a model class and use decorators for attributes and keys. Properties without decorators are ignored when the model is mapped to a dynamodb item. Here, a DTO (Data Transfer Object) class is also defined so that keys and meta data like `createdOn` remain in the data access layer. Note that attributes can have aliases, and that some attributes are properties, others defined using methods, and still others with accessors. Attributes defined using properties and methods are overwritten with the values pulled from dynamodb whereas accessors (in this case getters) are not. This means after an item/model has been retrieved from dynamodb, `updatedOn` will always assume the datetime value of when it is written to dynamodb whereas `createdOn` will retain the value from dynamodb by default.
 
 ```typescript
 import {
@@ -42,13 +42,15 @@ export class PersonDTO extends Model<PersonDTO> {
 
   @Attribute()
   public lastName: string;
+
+  public club: string;
 }
 
 @Table('MyTable')
 export class PersonModel extends PersonDTO {
   @PartitionKey()
   public PK() {
-    return 'CLUB';
+    return `CLUB#${this.club}`;
   }
 
   @SortKey()
